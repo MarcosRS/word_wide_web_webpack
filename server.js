@@ -19,16 +19,17 @@ io.on('connection', function (socket) {
         console.log('WHY???')
     })
 
-    socket.on('draw', function(obj){
-    	console.log(obj);
-        console.log('Remote Drawing')
+    socket.on('imDrawing', function(start, end, strokeColor, shouldBroadcast){
+    	 // Recieving Draw cooodtinated from any client
 
-  //       whiteboard.on('draw', function(){
+            //this code is emiting it to the front end.
+            socket.broadcast.emit('externalDraw', start, end, strokeColor);
 
-		// })
+
+
+  
     })
 
-     socket.emit('draw',{hello:'hi'});
 });
 
 

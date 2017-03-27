@@ -8,21 +8,22 @@ socket.on('connect', function () {
 });
 
 
-socket.on('draw',function(payload){
+socket.on('externalDraw',function(start, end, strokeColor){
 
-	console.log(payload);
-	console.log('browser drawing');
-
-	whiteboard.on('draw', function(){
-  		console.log('it is drawing!');
-	})
+		whiteboard.draw(start, end, strokeColor, false);
+  		
 
 })
 
 
-whiteboard.on('draw', function(){
+whiteboard.on('draw', function(start, end, strokeColor, shouldBroadcast = true){
   
-  // socket.emit('draw',{hello: 'nathan'})
-  socket.emit('draw', {u:'i'});
+  
+
+  socket.emit('imDrawing', start, end, strokeColor)
+
+  
 
 })
+
+
